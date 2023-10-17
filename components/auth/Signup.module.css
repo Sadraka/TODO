@@ -1,0 +1,101 @@
+.container {
+  background-color: rgb(255, 255, 255);
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.025em;
+}
+.form {
+ width: fit-content;
+ background-color: rgb(255, 255, 255);
+
+
+ 
+}
+.form input {
+  border: .5px solid gray;
+  border-radius: 5px;
+  height: 45px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 384px;
+}
+.form .header{
+  height: 152px;
+  font-weight: 700;
+}
+.form h1  {
+  text-align: center;
+  font-size:2.25rem;
+  font-weight: bold;
+  margin-top: 40px
+}
+.form h2{
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 40px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  
+}
+.forminput{
+  justify-content: center;
+
+}
+.forminput .nameandlast{
+  display: flex;
+  
+}
+
+.name{
+
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.nameandlast  input{
+  width: 187px;
+}
+.password{
+ display: flex;
+ flex-direction: column;
+}
+.errpassword {
+  color: red;
+}
+.button{
+  width: 384px;
+  background-color: #000;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size: .875rem;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.login {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.login span{
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: rgba(107, 114, 128, 0.838)
+  
+}
+.google{
+  text-align: center;
+  margin-top: 5px;
+}
+.login a {
+  color:#000;
+  font-weight: 600;
+}
+.login a:hover{
+
+  color:rgba(97, 104, 117, 0.988)
+
+} 

@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import WithGoogle from "./WithGoogle";
+export { SessionProvider } from "next-auth/react";
 
 export default function Login() {
   const [user, setUser] = useState({ email: "", password: "", repassword: "" });
@@ -16,12 +19,20 @@ export default function Login() {
         return;
     }
   };
+  const clickHandler = async () => {
+    const res = await signIn("credentials", {
+      email: user.email,
+      password: user.password,
+      redirect: "/",
+    });
+    console.log(res);
+  };
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h1 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
-            TD
+            Todo
           </h1>
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
@@ -82,15 +93,19 @@ export default function Login() {
 
             <div>
               <button
+                onClick={() => clickHandler()}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
                 Sign in
               </button>
+              <div className="text-gray-500 text-center mt-1">
+                <WithGoogle />
+              </div>
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 text-center text-1rem text-gray-500">
             Not a member?{" "}
             <Link
               href={"/signup"}

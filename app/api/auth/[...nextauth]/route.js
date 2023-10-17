@@ -5,8 +5,8 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
 import DBconnection from "@/app/utils/DBconnection";
+import { NextResponse } from "next/server";
 
 export const authOptions = {
   session: { strategy: "jwt" },
@@ -15,6 +15,7 @@ export const authOptions = {
       async authorize(credentails, req) {
         const { email, password } = credentails;
         try {
+          console.log(email);
           await DBconnection();
         } catch (err) {
           throw new Error("Error in connecting to Db");
@@ -37,10 +38,6 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
