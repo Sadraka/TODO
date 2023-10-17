@@ -10,6 +10,7 @@ export default function signup() {
     password: "",
     repassword: "",
   });
+  const [isclick, setIsclick] = useState(false);
   const changeHandler = (e) => {
     switch (e.target.id) {
       case "name":
@@ -30,6 +31,8 @@ export default function signup() {
     }
   };
   const clickHandler = async (e) => {
+    setIsclick(true);
+    console.log("click");
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       body: JSON.stringify(user),
@@ -39,6 +42,9 @@ export default function signup() {
     });
     const data = await res.json();
     console.log(data);
+    if (data) {
+      setIsclick(false);
+    }
   };
   return (
     <div className={styles.container}>
@@ -121,8 +127,10 @@ export default function signup() {
             />
           </div>
         </div>
-        <div className={styles.button}>
-          <button onClick={(e) => clickHandler(e)}>Sign up</button>
+        <div className={isclick ? styles.clicked : styles.button}>
+          <button onClick={(e) => clickHandler(e)} disabled={isclick}>
+            Sign up
+          </button>
         </div>
         {/* <div className={styles.google}>
           <WithGoogle />

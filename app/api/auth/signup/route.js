@@ -9,7 +9,6 @@ export async function POST(req) {
 
     try {
       const { email, password, repassword, name, lastname } = await req.json();
-      console.log(email);
       if (!email || !password || !name || !lastname || !repassword) {
         return NextResponse.json(
           {

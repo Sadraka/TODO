@@ -65,7 +65,7 @@
 .errpassword {
   color: red;
 }
-.button{
+.button button{
   width: 384px;
   background-color: #000;
   cursor: pointer;
@@ -75,6 +75,18 @@
   font-size: .875rem;
   border-radius: 5px;
   margin-top: 10px;
+}
+.clicked button{
+  cursor: not-allowed;
+  width: 384px;
+  background-color: #00000039;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size: .875rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: all .15s;
 }
 .login {
   margin-top: 1.5rem;
