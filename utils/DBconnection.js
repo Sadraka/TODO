@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
-async function dbconnection() {
-  if (mongoose.connections.readyState[0]) return;
+export default async function DBconnection() {
+  if (mongoose.connections[0].readyState) return;
   await mongoose.connect(process.env.MD_URI);
   console.log("DB connected");
 }
-
-export default dbconnection;
