@@ -1,7 +1,7 @@
 const error = (data) => {
   const { name, lastname, email, password, repassword } = data;
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g; //test@gmail.com
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //At least 8 characters , Number & Letters
 
   const result = {
     emailResult: emailRegex.test(email),

@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import Link from "next/link";
+
 import error from "@/app/utils/error";
+
 export default function signup() {
   const [user, setUser] = useState({
     name: "",
@@ -12,6 +14,10 @@ export default function signup() {
     repassword: "",
   });
   const [isclick, setIsclick] = useState(false);
+  const [showerror, setShowerror] = useState(false);
+
+  const err = error(user);
+
   const changeHandler = (e) => {
     switch (e.target.id) {
       case "name":
@@ -31,24 +37,25 @@ export default function signup() {
         return;
     }
   };
-  useEffect(() => {
-    const err = error(user);
-    console.log(err.res());
-  }, [user]);
 
   const clickHandler = async (e) => {
     setIsclick(true);
-    console.log("click");
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-    if (data) {
+    if (err.signupResult()) {
+      setShowerror(false);
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data) {
+        setIsclick(false);
+      }
+    } else {
+      setShowerror(true);
       setIsclick(false);
     }
   };
@@ -67,21 +74,26 @@ export default function signup() {
                 htmlFor="name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Name
+                Name *
               </label>
+
               <input
                 onChange={(e) => changeHandler(e)}
                 placeholder="Sadra"
                 id="name"
                 type="text"
               />
+              {showerror && !err.nameResult && (
+                <span className={styles.texterror}>Name requared !</span>
+              )}
             </div>
+
             <div className={styles.lastname}>
               <label
                 htmlFor="lastname"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Lastname
+                Lastname *
               </label>
 
               <input
@@ -90,6 +102,9 @@ export default function signup() {
                 id="lastname"
                 type="text"
               />
+              {showerror && !err.lastnameResult && (
+                <span className={styles.texterror}>Lastname requared !</span>
+              )}
             </div>
           </div>
           <div className={styles.email}>
@@ -105,6 +120,9 @@ export default function signup() {
               id="email"
               type="email"
             />
+            {showerror && !err.emailResult && (
+              <span className={styles.texterror}>Email is not valid!</span>
+            )}
           </div>
           <div className={styles.password}>
             <label
@@ -119,6 +137,12 @@ export default function signup() {
               id="password"
               type="password"
             />
+            {showerror && !err.passwordResult && (
+              <span className={styles.texterror}>
+                The password should be more than 8 & contain letters and numbers
+              </span>
+            )}
+
             <label
               htmlFor="repassword"
               className="block text-sm font-medium leading-6 text-gray-900"
@@ -131,6 +155,11 @@ export default function signup() {
               id="repassword"
               type="password"
             />
+            {showerror && !err.matchpassword && (
+              <span className={styles.texterror}>
+                The passwords are not identical to each other !
+              </span>
+            )}
           </div>
         </div>
         <div className={isclick ? styles.clicked : styles.button}>
