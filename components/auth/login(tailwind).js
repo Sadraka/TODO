@@ -1,56 +1,42 @@
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import WithGoogle from "./WithGoogle";
-import Link from "next/link";
 export { SessionProvider } from "next-auth/react";
 
 export default function Login() {
-  const rotuer = useRouter();
-
-  // protect client side page
-  // useSession looklike useState ==> rerender component
-  const { data, status } = useSession();
-  console.log("signin ", status);
-
-  const [userdata, setUserdata] = useState({ email: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "", repassword: "" });
   const changeHandler = (e) => {
+    console.log(user);
+
     switch (e.target.id) {
       case "email":
-        setUserdata({ ...userdata, email: e.target.value });
+        setUser({ ...user, email: e.target.value });
         return;
       case "password":
-        setUserdata({ ...userdata, password: e.target.value });
+        setUser({ ...user, password: e.target.value });
         return;
     }
   };
-  const clickHandler = async () => {
-    const res = await signIn("credentials", {
-      email: userdata.email,
-      password: userdata.password,
-      redirect: "/dashboard",
+  const rotuer = useRouter();
+  const { data, status } = useSession();
+  console.log("signin ", status);
+  useEffect(() => {
+    if (status === "authenticated") {
+      console.log(data, status);
+    }
+  }, [status]);
+  const clickHandler = () => {
+    const res = signIn("credentials", {
+      email: user.email,
+      password: user.password,
+      redirect: "/",
     });
     console.log(res);
   };
   return (
-    // <>
-    //   <h1>Sign in</h1>
-    //   <input
-    //     onChange={(e) => changeHandler(e)}
-    //     value={userdata.email}
-    //     type="text"
-    //     placeholder="email"
-    //   />
-    //   <input
-    //     onChange={(e) => changeHandler(e)}
-    //     value={userdata.password}
-    //     type="password"
-    //     placeholder="password"
-    //   />
-    //   <button onClick={() => clickHandler()}>sign in</button>
-    //   <WithGoogle />
-    // </>
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -63,7 +49,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="space-y-6">
+          <form className="space-y-6" action="#" method="POST">
             <div>
               <label
                 htmlFor="email"
@@ -106,6 +92,7 @@ export default function Login() {
                   id="password"
                   name="password"
                   type="password"
+                  autoComplete="current-password"
                   className="block w-full rounded-md border-0 py-2.5 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-800 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -123,7 +110,7 @@ export default function Login() {
                 <WithGoogle />
               </div>
             </div>
-          </div>
+          </form>
 
           <p className="mt-10 text-center text-1rem text-gray-500">
             Not a member?{" "}
@@ -134,6 +121,7 @@ export default function Login() {
               Register
             </Link>
           </p>
+          <button onClick={signOut}>logout</button>
         </div>
       </div>
     </>
