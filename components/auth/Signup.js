@@ -60,7 +60,7 @@ export default function signup() {
             success: {
               background: "#000",
               textColor: "#fff",
-              fontAwesomeIconColor: `rgba(238,0, 0, 0.8)`,
+              notiflixIconColor: "#fff",
             },
           });
         } else {
@@ -68,7 +68,7 @@ export default function signup() {
             position: "center-bottom",
             failure: {
               background: "rgba(107, 114, 128)",
-              fontAwesomeIconColor: `rgba(238,0, 0, 0.8)`,
+              notiflixIconColor: "#fff",
             },
           });
         }
