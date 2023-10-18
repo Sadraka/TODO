@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import Link from "next/link";
-
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 import error from "@/app/utils/error";
+import Notiflix from "notiflix";
 
 export default function signup() {
   const [user, setUser] = useState({
@@ -53,6 +54,24 @@ export default function signup() {
       console.log(data);
       if (data) {
         setIsclick(false);
+        if (data.message === "success") {
+          Notify.success(`Welcome ${data.newUser.name}`, {
+            position: "center-bottom",
+            success: {
+              background: "#000",
+              textColor: "#fff",
+              fontAwesomeIconColor: `rgba(238,0, 0, 0.8)`,
+            },
+          });
+        } else {
+          Notify.failure(data.message, {
+            position: "center-bottom",
+            failure: {
+              background: "rgba(107, 114, 128)",
+              fontAwesomeIconColor: `rgba(238,0, 0, 0.8)`,
+            },
+          });
+        }
       }
     } else {
       setShowerror(true);
