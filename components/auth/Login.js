@@ -1,20 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import WithGoogle from "./WithGoogle";
 import Link from "next/link";
+import error from "@/app/utils/error";
 export { SessionProvider } from "next-auth/react";
 
 export default function Login() {
-  const rotuer = useRouter();
+  const [userdata, setUserdata] = useState({ email: "", password: "" });
 
   // protect client side page
   // useSession looklike useState ==> rerender component
   const { data, status } = useSession();
   console.log("signin ", data);
 
-  const [userdata, setUserdata] = useState({ email: "", password: "" });
+  /////////////////////////////////
   const changeHandler = (e) => {
     switch (e.target.id) {
       case "email":
@@ -25,6 +26,7 @@ export default function Login() {
         return;
     }
   };
+  ////////////////////////////////
   const clickHandler = async () => {
     const res = await signIn("credentials", {
       email: userdata.email,
@@ -33,6 +35,10 @@ export default function Login() {
     });
     console.log(res);
   };
+  useEffect(() => {
+    const res = error(userdata).loginResult();
+    console.log(res);
+  }, [userdata]);
   return (
     // <>
     //   <h1>Sign in</h1>
@@ -113,7 +119,7 @@ export default function Login() {
 
             <div>
               <button
-                onClick={clickHandler}
+                onClick={() => clickHandler()}
                 type="submit"
                 className="flex w-full transition-all justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >

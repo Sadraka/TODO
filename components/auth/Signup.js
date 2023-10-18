@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import Link from "next/link";
+import error from "@/app/utils/error";
 export default function signup() {
   const [user, setUser] = useState({
     name: "",
@@ -30,6 +31,11 @@ export default function signup() {
         return;
     }
   };
+  useEffect(() => {
+    const err = error(user);
+    console.log(err.res());
+  }, [user]);
+
   const clickHandler = async (e) => {
     setIsclick(true);
     console.log("click");
