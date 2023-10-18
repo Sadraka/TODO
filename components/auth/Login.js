@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import WithGoogle from "./WithGoogle";
 export { SessionProvider } from "next-auth/react";
 
@@ -19,6 +20,14 @@ export default function Login() {
         return;
     }
   };
+  const rotuer = useRouter();
+  const { data, status } = useSession();
+  console.log("signin ", status);
+  useEffect(() => {
+    if (status === "authenticated") {
+      console.log(data, status);
+    }
+  }, [status]);
   const clickHandler = async () => {
     const res = await signIn("credentials", {
       email: user.email,
@@ -55,7 +64,6 @@ export default function Login() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  required
                   className="block w-full rounded-md border-0 py-2.5  p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                 />
               </div>

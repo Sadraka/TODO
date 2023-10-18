@@ -6,7 +6,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import DBconnection from "@/app/utils/DBconnection";
-import { NextResponse } from "next/server";
+
 
 export const authOptions = {
   session: { strategy: "jwt" },
@@ -15,7 +15,6 @@ export const authOptions = {
       async authorize(credentails, req) {
         const { email, password } = credentails;
         try {
-          console.log(email);
           await DBconnection();
         } catch (err) {
           throw new Error("Error in connecting to Db");
