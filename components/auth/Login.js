@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import WithGoogle from "./WithGoogle";
@@ -12,7 +12,7 @@ export default function Login() {
   // protect client side page
   // useSession looklike useState ==> rerender component
   const { data, status } = useSession();
-  console.log("signin ", status);
+  console.log("signin ", data);
 
   const [userdata, setUserdata] = useState({ email: "", password: "" });
   const changeHandler = (e) => {
@@ -115,7 +115,7 @@ export default function Login() {
               <button
                 onClick={clickHandler}
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                className="flex w-full transition-all justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
                 Sign in
               </button>
