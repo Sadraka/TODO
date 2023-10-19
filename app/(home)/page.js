@@ -1,4 +1,5 @@
 "use client";
+
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,16 +16,7 @@ export default function Home() {
     <>
       <div>
         <h1 className="underline">Todo list</h1>
-        {status === "unauthenticated" && (
-          <div>
-            <Link
-              href={"/login"}
-              className="text-3xl bg-gray-400 ml-1 transition-all duration-150 hover:opacity-60 text-white rounded-5"
-            >
-              Login
-            </Link>
-          </div>
-        )}
+
         {status === "authenticated" && (
           <div>
             <h1>
