@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { NextAuthProvider } from "../provider/provider";
+import { NextAuthProvider } from "../../provider/provider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
