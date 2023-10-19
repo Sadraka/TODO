@@ -28,13 +28,19 @@
     background-color: rgb(75 85 99);
   
   }
-  .texterror{
+  .diverror{
     display: block;
-    font-size: .8rem !important;
+    font-size: .8rem ;
     line-height:normal;
     height: .8rem;
+  }
+  .texterror{
+
+    font-size: .8rem ;
+
   
   }
+
 
 @media screen and (max-width: 640px){
 

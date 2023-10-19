@@ -7,6 +7,7 @@ import Link from "next/link";
 import error from "@/app/utils/error";
 export { SessionProvider } from "next-auth/react";
 import styles from "./Login.module.css";
+import { Notify } from "notiflix";
 
 export default function Login() {
   const [userdata, setUserdata] = useState({ email: "", password: "" });
@@ -16,7 +17,7 @@ export default function Login() {
   // protect client side page
   // useSession looklike useState ==> rerender component
   const { data, status } = useSession();
-
+  const router = useRouter();
   /////////////////////////////////
   const changeHandler = (e) => {
     switch (e.target.id) {
@@ -36,17 +37,54 @@ export default function Login() {
       const res = await signIn("credentials", {
         email: userdata.email,
         password: userdata.password,
+        redirect: false,
+        //In case of error, it does not redirect to the api page
       });
-      console.log(res);
+      if (!res.error) {
+        Notify.success(`Welcome`, {
+          position: "center-bottom",
+          success: {
+            background: "#000",
+            textColor: "#fff",
+            notiflixIconColor: "#fff",
+          },
+        });
+        router.replace("/");
+        console.log(res);
+      }
+      if (res.error) {
+        if (res.error === "Illegal arguments: string, undefined") {
+          Notify.failure("Please login with your Google", {
+            position: "center-bottom",
+            clickToClose: true,
+            failure: {
+              background: "rgba(107, 114, 128)",
+              notiflixIconColor: "#fff",
+            },
+          });
+        } else {
+          Notify.failure(res.error, {
+            position: "center-bottom",
+            clickToClose: true,
+            failure: {
+              background: "rgba(107, 114, 128)",
+              notiflixIconColor: "#fff",
+            },
+          });
+        }
+      }
     } else {
       setShowerror(true);
-      setIsclick(false);
     }
+    setIsclick(false);
   };
 
   useEffect(() => {
-    console.log(isclick);
-  }, [isclick]);
+    console.log(data, status);
+    if (status === "authenticated") {
+      router.replace("/");
+    }
+  }, [data]);
   return (
     // <>
     //   <h1>Sign in</h1>
@@ -95,10 +133,12 @@ export default function Login() {
                   className="block w-full outline-none rounded-md border-0 py-2.5  p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400   sm:text-sm sm:leading-6"
                 />
               </div>
-              {showerror && !err.emailResult && (
-                <span className={styles.texterror}>Email is not valid!</span>
-              )}
-              {!showerror && <span className={styles.texterror}></span>}
+
+              <div className={styles.diverror}>
+                {showerror && !err.emailResult && (
+                  <span className={styles.texterror}>Email is not valid!</span>
+                )}
+              </div>
             </div>
 
             <div>
@@ -127,12 +167,14 @@ export default function Login() {
                   className=" block w-full outline-none rounded-md border-0 py-2.5 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-800  sm:text-sm sm:leading-6"
                 />
               </div>
-              {showerror && !err.passwordResult && (
-                <span className={styles.texterror}>
-                  Enter correct password{" "}
-                </span>
-              )}
-              {!showerror && <span className={styles.texterror}></span>}
+
+              <div className={styles.diverror}>
+                {showerror && !err.passwordResult && (
+                  <span className={styles.texterror}>
+                    Enter correct password{" "}
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className={isclick ? styles.clicked : styles.button}>

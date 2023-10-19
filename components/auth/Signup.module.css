@@ -122,14 +122,19 @@ outline: none;}
   color:rgba(97, 104, 117, 0.988)
 
 } 
-.texterror{
+.diverror{
   display: block;
   font-size:0.80rem;
   top: 5px;
   line-height: normal;
  height:0.8rem ;
+}
+.texterror{
+
+  font-size:0.80rem;
 
 }
+
 @media screen and (max-width:640px) {
  .nameandlast{
   flex-direction: column;

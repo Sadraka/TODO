@@ -7,9 +7,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import DBconnection from "@/app/utils/DBconnection";
 
-
 export const authOptions = {
   session: { strategy: "jwt" },
+
   providers: [
     CredentialsProvider({
       async authorize(credentails, req) {
@@ -28,7 +28,7 @@ export const authOptions = {
         }
         const isValid = await verifiyPass(password, user.password);
         if (!isValid) {
-          throw new Error("User or Password incorect");
+          throw new Error("Email or Password incorect");
         }
         return { email };
       },

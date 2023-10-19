@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import error from "@/app/utils/error";
 import Notiflix from "notiflix";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function signup() {
   const [user, setUser] = useState({
@@ -18,6 +20,10 @@ export default function signup() {
   const [showerror, setShowerror] = useState(false);
 
   const err = error(user);
+
+  const { data, status } = useSession();
+
+  const router = useRouter();
 
   const changeHandler = (e) => {
     switch (e.target.id) {
@@ -57,6 +63,7 @@ export default function signup() {
         if (data.message === "success") {
           Notify.success(`Welcome ${data.newUser.name}`, {
             position: "center-bottom",
+            clickToClose: true,
             success: {
               background: "#000",
               textColor: "#fff",
@@ -66,6 +73,7 @@ export default function signup() {
         } else {
           Notify.failure(data.message, {
             position: "center-bottom",
+            clickToClose: true,
             failure: {
               background: "rgba(107, 114, 128)",
               notiflixIconColor: "#fff",
@@ -78,6 +86,11 @@ export default function signup() {
       setIsclick(false);
     }
   };
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/");
+    }
+  }, [data]);
   return (
     <div className={styles.container}>
       <div className={styles.form}>
@@ -102,10 +115,12 @@ export default function signup() {
                 id="name"
                 type="text"
               />
-              {showerror && !err.nameResult && (
-                <span className={styles.texterror}>Name requared !</span>
-              )}
-              {!showerror && <span className={styles.texterror}></span>}
+
+              <div className={styles.diverror}>
+                {showerror && !err.nameResult && (
+                  <span className={styles.texterror}>Name requared !</span>
+                )}
+              </div>
             </div>
 
             <div className={styles.lastname}>
@@ -122,10 +137,11 @@ export default function signup() {
                 id="lastname"
                 type="text"
               />
-              {showerror && !err.lastnameResult && (
-                <span className={styles.texterror}>Lastname requared !</span>
-              )}
-              {!showerror && <span className={styles.texterror}></span>}
+              <div className={styles.diverror}>
+                {showerror && !err.lastnameResult && (
+                  <span className={styles.texterror}>Lastname requared !</span>
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.email}>
@@ -141,10 +157,12 @@ export default function signup() {
               id="email"
               type="email"
             />
-            {showerror && !err.emailResult && (
-              <span className={styles.texterror}>Email is not valid!</span>
-            )}
-            {!showerror && <span className={styles.texterror}></span>}
+
+            <div className={styles.diverror}>
+              {showerror && !err.emailResult && (
+                <span className={styles.texterror}>Email is not valid!</span>
+              )}
+            </div>
           </div>
           <div className={styles.password}>
             <label
@@ -159,12 +177,14 @@ export default function signup() {
               id="password"
               type="password"
             />
-            {showerror && !err.passwordResult && (
-              <span className={styles.texterror}>
-                The password should be more than 8 & contain letters and numbers
-              </span>
-            )}
-            {!showerror && <span className={styles.texterror}></span>}
+            <div className={styles.diverror}>
+              {showerror && !err.passwordResult && (
+                <span className={styles.texterror}>
+                  The password should be more than 8 & contain letters and
+                  numbers
+                </span>
+              )}
+            </div>
 
             <label
               htmlFor="repassword"
@@ -178,12 +198,14 @@ export default function signup() {
               id="repassword"
               type="password"
             />
-            {showerror && !err.matchpassword && (
-              <span className={styles.texterror}>
-                The passwords are not identical to each other !
-              </span>
-            )}
-            {!showerror && <span className={styles.texterror}></span>}
+
+            <div className={styles.diverror}>
+              {showerror && !err.matchpassword && (
+                <span className={styles.texterror}>
+                  The passwords are not identical to each other !
+                </span>
+              )}
+            </div>
           </div>
         </div>
         <div className={isclick ? styles.clicked : styles.button}>
