@@ -105,6 +105,7 @@ export default function signup() {
               {showerror && !err.nameResult && (
                 <span className={styles.texterror}>Name requared !</span>
               )}
+              {!showerror && <span className={styles.texterror}></span>}
             </div>
 
             <div className={styles.lastname}>
@@ -124,6 +125,7 @@ export default function signup() {
               {showerror && !err.lastnameResult && (
                 <span className={styles.texterror}>Lastname requared !</span>
               )}
+              {!showerror && <span className={styles.texterror}></span>}
             </div>
           </div>
           <div className={styles.email}>
@@ -142,6 +144,7 @@ export default function signup() {
             {showerror && !err.emailResult && (
               <span className={styles.texterror}>Email is not valid!</span>
             )}
+            {!showerror && <span className={styles.texterror}></span>}
           </div>
           <div className={styles.password}>
             <label
@@ -161,6 +164,7 @@ export default function signup() {
                 The password should be more than 8 & contain letters and numbers
               </span>
             )}
+            {!showerror && <span className={styles.texterror}></span>}
 
             <label
               htmlFor="repassword"
@@ -179,6 +183,7 @@ export default function signup() {
                 The passwords are not identical to each other !
               </span>
             )}
+            {!showerror && <span className={styles.texterror}></span>}
           </div>
         </div>
         <div className={isclick ? styles.clicked : styles.button}>

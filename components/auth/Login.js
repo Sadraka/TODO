@@ -6,14 +6,16 @@ import WithGoogle from "./WithGoogle";
 import Link from "next/link";
 import error from "@/app/utils/error";
 export { SessionProvider } from "next-auth/react";
+import styles from "./Login.module.css";
 
 export default function Login() {
   const [userdata, setUserdata] = useState({ email: "", password: "" });
-
+  const [isclick, setIsclick] = useState(false);
+  const [showerror, setShowerror] = useState(false);
+  const err = error(userdata);
   // protect client side page
   // useSession looklike useState ==> rerender component
   const { data, status } = useSession();
-  console.log("signin ", data);
 
   /////////////////////////////////
   const changeHandler = (e) => {
@@ -28,18 +30,23 @@ export default function Login() {
   };
   ////////////////////////////////
   const clickHandler = async () => {
-    const res = await signIn("credentials", {
-      email: userdata.email,
-      password: userdata.password,
-      redirect: "/dashboard",
-    });
-    console.log(res);
+    setIsclick(true);
+    if (err.loginResult()) {
+      setShowerror(false);
+      const res = await signIn("credentials", {
+        email: userdata.email,
+        password: userdata.password,
+      });
+      console.log(res);
+    } else {
+      setShowerror(true);
+      setIsclick(false);
+    }
   };
 
-  // useEffect(() => {
-  //   const res = error(userdata).loginResult();
-  //   console.log(res);
-  // }, [userdata]);
+  useEffect(() => {
+    console.log(isclick);
+  }, [isclick]);
   return (
     // <>
     //   <h1>Sign in</h1>
@@ -70,11 +77,11 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="space-y-6">
+          <div className="space-y-7">
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-400"
               >
                 Email address
               </label>
@@ -85,16 +92,20 @@ export default function Login() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="block w-full rounded-md border-0 py-2.5  p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                  className="block w-full outline-none rounded-md border-0 py-2.5  p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400   sm:text-sm sm:leading-6"
                 />
               </div>
+              {showerror && !err.emailResult && (
+                <span className={styles.texterror}>Email is not valid!</span>
+              )}
+              {!showerror && <span className={styles.texterror}></span>}
             </div>
 
             <div>
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-gray-400"
                 >
                   Password
                 </label>
@@ -113,22 +124,28 @@ export default function Login() {
                   id="password"
                   name="password"
                   type="password"
-                  className="block w-full rounded-md border-0 py-2.5 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-800 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                  className=" block w-full outline-none rounded-md border-0 py-2.5 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-500 placeholder:text-gray-800  sm:text-sm sm:leading-6"
                 />
               </div>
+              {showerror && !err.passwordResult && (
+                <span className={styles.texterror}>
+                  Enter correct password{" "}
+                </span>
+              )}
+              {!showerror && <span className={styles.texterror}></span>}
             </div>
 
-            <div>
+            <div className={isclick ? styles.clicked : styles.button}>
               <button
                 onClick={() => clickHandler()}
+                disabled={isclick}
                 type="submit"
-                className="flex w-full transition-all justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
                 Sign in
               </button>
-              <div className="text-gray-500 text-center mt-1">
-                <WithGoogle />
-              </div>
+            </div>
+            <div className="text-gray-500 text-center mt-1">
+              <WithGoogle />
             </div>
           </div>
 
