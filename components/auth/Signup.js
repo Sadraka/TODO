@@ -70,6 +70,7 @@ export default function signup() {
               notiflixIconColor: "#fff",
             },
           });
+          router.push("/login");
         } else {
           Notify.failure(data.message, {
             position: "center-bottom",
