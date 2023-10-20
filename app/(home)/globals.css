@@ -2,5 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 body svg{
-    pointer-events: none;
+    pointer-events: none !important;
+    /* to prevent svg click  */
 }

@@ -48,9 +48,13 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (e) => {
-    console.log(e.target, "0");
+    const childNode = !e.target.textContent
+      ? e.target.childNodes[0].attributes[5].nodeValue
+      : e.target.textContent;
+    //to select li ==> li and Typography are not same attributes
+    console.log(childNode);
     setAnchorElNav(null);
-    switch (e.target.textContent) {
+    switch (childNode) {
       case "Login":
         router.push("/login");
         return;
@@ -67,6 +71,7 @@ function ResponsiveAppBar() {
         return;
       case "Add Todo":
         router.push("/");
+        return;
     }
   };
 
