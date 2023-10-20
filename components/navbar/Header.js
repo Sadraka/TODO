@@ -48,9 +48,22 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (e) => {
-    const childNode = !e.target.textContent
+    const childNode = e.target.textContent
+      ? e.target.textContent
+      : !e.target.textContent
       ? e.target.childNodes[0].attributes[5].nodeValue
-      : e.target.textContent;
+      : null;
+    // let childNode;
+    // if (e.target.textContent) {
+    //   childNode = e.target.textContent;
+    // } else if (
+    //   !e.target.textContent &&
+    //   e.target.childNodes[0].attributes[5].nodeValue
+    // ) {
+    //   childNode = e.target.childNodes[0].attributes[5].nodeValue;
+    // } else {
+    //   childNode = "";
+    // }
     //to select li ==> li and Typography are not same attributes
     console.log(childNode);
     setAnchorElNav(null);
