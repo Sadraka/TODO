@@ -17,8 +17,17 @@ import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import PersonIcon from "@mui/icons-material/Person";
+import { styled } from "@mui/material/styles";
+import { tooltipClasses } from "@mui/material/Tooltip";
+
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+
 const unAuthPages = ["Login"];
-const AuthPages = ["Profile", "Logout"];
+const AuthPages = ["Todos", "Add Todo", "Profile", "Logout"];
 const authSetting = ["Profile", "Logout"];
 const unauthSetting = ["Login"];
 
@@ -28,8 +37,6 @@ function ResponsiveAppBar() {
 
   const { data, status } = useSession();
   console.log(status);
-
-  const avatar = PersonIcon;
 
   const router = useRouter();
 
@@ -41,6 +48,7 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (e) => {
+    console.log(e.target, "0");
     setAnchorElNav(null);
     switch (e.target.textContent) {
       case "Login":
@@ -54,6 +62,11 @@ function ResponsiveAppBar() {
       case "Profile":
         router.push("/profile");
         return;
+      case "Todos":
+        router.push("/todos");
+        return;
+      case "Add Todo":
+        router.push("/");
     }
   };
 
@@ -61,7 +74,7 @@ function ResponsiveAppBar() {
     //for close menu
     setAnchorElUser(null);
 
-    console.log(e.target.textContent);
+    console.log(e.target.textContent, "1");
     switch (e.target.textContent) {
       case "Login":
         router.push("/login");
@@ -76,7 +89,16 @@ function ResponsiveAppBar() {
         return;
     }
   };
-
+  const LightTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: "rgba(0, 0, 0, 0.87)",
+      boxShadow: theme.shadows[1],
+      fontSize: 15,
+    },
+  }));
   return (
     <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
@@ -131,17 +153,39 @@ function ResponsiveAppBar() {
               {status === "authenticated"
                 ? AuthPages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        {page === "Todos" && <FormatListBulletedIcon />}
+                        {page === "Add Todo" && <PlaylistAddIcon />}
+                        {page === "Profile" && <ManageAccountsIcon />}
+                        {page === "Logout" && <LogoutIcon />}
+                        <Typography
+                          textAlign="center"
+                          sx={{ paddingLeft: "15px", fontWeight: "500" }}
+                        >
+                          {page}
+                        </Typography>
+                      </div>
                     </MenuItem>
                   ))
                 : unAuthPages.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
+                      {page === "Login" && <LockOpenIcon />}
+                      <Typography
+                        textAlign="center"
+                        sx={{ paddingLeft: "15px", fontWeight: "500" }}
+                      >
+                        {page}
+                      </Typography>
                     </MenuItem>
                   ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -170,17 +214,51 @@ function ResponsiveAppBar() {
                 {page}
               </Button>
             ))} */}
-            {status === "authenticated"
-              ? AuthPages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))
-              : unAuthPages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                minWidth: "80vw",
+              }}
+            >
+              {status === "authenticated"
+                ? AuthPages.map((page) => (
+                    <MenuItem
+                      key={page}
+                      onClick={handleCloseNavMenu}
+                      sx={{ marginLeft: "50px" }}
+                    >
+                      {page === "Todos" && (
+                        <LightTooltip title={page} id="salam">
+                          <FormatListBulletedIcon />
+                        </LightTooltip>
+                      )}
+                      {page === "Add Todo" && (
+                        <LightTooltip title={page}>
+                          <PlaylistAddIcon />
+                        </LightTooltip>
+                      )}
+                      {page === "Profile" && (
+                        <LightTooltip title={page}>
+                          <ManageAccountsIcon />
+                        </LightTooltip>
+                      )}
+                      {page === "Logout" && (
+                        <LightTooltip title={page}>
+                          <LogoutIcon />
+                        </LightTooltip>
+                      )}
+                      <Typography textAlign="center"></Typography>
+                    </MenuItem>
+                  ))
+                : unAuthPages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <LightTooltip title={page}>
+                        <LockOpenIcon />
+                      </LightTooltip>
+                    </MenuItem>
+                  ))}
+            </div>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
