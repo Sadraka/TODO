@@ -20,6 +20,7 @@ export async function GET() {
       return NextResponse.json({ user }, { status: 200 });
     } catch (err) {
       console.log(err);
+      return NextResponse.json({ message: err }, { status: 500 });
     }
   } catch (err) {
     return NextResponse.json(

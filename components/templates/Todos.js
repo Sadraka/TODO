@@ -1,9 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Cards from "../modules/Cards";
+import { useSession } from "next-auth/react";
 
 export default function Todos() {
   const [user, setUser] = useState("");
+  const { status, data } = useSession();
+
   const fethData = async () => {
     const res = await fetch("/api/todo/get");
     const data = await res.json();
@@ -21,7 +24,9 @@ export default function Todos() {
   };
 
   useEffect(() => {
-    fethData();
+    if (status === "authenticated") {
+      fethData();
+    }
   }, []);
   return (
     <div className="mt-7">
