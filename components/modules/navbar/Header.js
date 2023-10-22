@@ -36,7 +36,6 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const { data, status } = useSession();
-  console.log(status);
 
   const router = useRouter();
 
@@ -65,7 +64,7 @@ function ResponsiveAppBar() {
     //   childNode = "";
     // }
     //to select li ==> li and Typography are not same attributes
-    console.log(childNode);
+
     setAnchorElNav(null);
     switch (childNode) {
       case "Login":
@@ -92,7 +91,6 @@ function ResponsiveAppBar() {
     //for close menu
     setAnchorElUser(null);
 
-    console.log(e.target.textContent, "1");
     switch (e.target.textContent) {
       case "Login":
         router.push("/login");
@@ -286,11 +284,7 @@ function ResponsiveAppBar() {
                   <Avatar
                     sx={{ bgcolor: "transparent" }}
                     alt="S"
-                    src={
-                      status === "authenticated"
-                        ? data.user.image
-                        : "/avatar.jpg"
-                    }
+                    src={status === "authenticated" ? data.user.image : " "}
                   >
                     <PersonIcon />
                   </Avatar>

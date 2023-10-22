@@ -1,0 +1,52 @@
+.container{
+    display: block;
+
+    overflow: auto;
+    white-space:nowrap;
+    position: relative; 
+    width: 100%;
+    min-height: 84vh;
+    
+    
+}
+.container .card {
+   width: 245px;
+   padding-left: 24px;
+    
+}
+.container .title{
+    width: 245px;
+    display: grid;
+    
+    
+}
+.card input {
+    margin-top: 5px;
+    border:4px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 45px;
+    padding: 5px;
+
+    
+  }
+  
+.container button{
+   
+    background-color: black;
+    color: #fff;
+
+}
+.container .titleButton{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+
+}
+.container button:hover{
+    color: #000;
+    background-color: #f1f1f1;
+
+}
+.container input:focus{
+    outline: none;
+}

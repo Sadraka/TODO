@@ -1,7 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*{
+    box-sizing: border-box;
+}
 svg{
     pointer-events: none !important;
     /* to prevent svg click  */
 }
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* needed for container min-height */
+  }
