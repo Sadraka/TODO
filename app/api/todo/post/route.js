@@ -23,6 +23,7 @@ export async function POST(req) {
           { status: 400 }
         );
       }
+      // check if title is empty ==> error
 
       const user = await User.findOne({ email: session.user.email });
       user.todo = todo;
