@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import SingleCard from "./SingleCard";
 import styles from "./Cards.module.css";
-export default function Cards({ todo }) {
+export default function Cards({ todo, postData }) {
   const [addTitle, setAddTitle] = useState();
   const [todos, setTodos] = useState([...todo]);
   const clickHandler = (e) => {
@@ -13,19 +13,19 @@ export default function Cards({ todo }) {
       { todoTitle: "", todos: [{ todoName: "", status: "" }] },
     ]);
   };
-  console.log("cards", todos);
+
   return (
     <>
       <div className={styles.container}>
         {todos &&
           todos.map((item, index) => (
-            <div className={styles.singlecard}>
+            <div className={styles.singlecard} key={index}>
               <SingleCard
                 todo={item}
-                key={index}
                 setTodos={setTodos}
                 index={index}
                 todos={todos}
+                postData={postData}
               />
             </div>
           ))}

@@ -3,7 +3,7 @@ import User from "@/models/User";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function DELETE(req) {
   try {
     await DBconnection();
     try {

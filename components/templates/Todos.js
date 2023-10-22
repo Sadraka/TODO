@@ -10,8 +10,22 @@ export default function Todos() {
     setUser(data.user);
   };
 
+  const postData = async (index) => {
+    const res = await fetch("/api/todo/post", {
+      method: "POST",
+      body: JSON.stringify(index),
+      "Content-Type": "application/json",
+    });
+    const data = await res.json();
+    console.log(data, "POST DATA");
+  };
+
   useEffect(() => {
     fethData();
   }, []);
-  return <div className="mt-7">{user && <Cards todo={user.todo} />}</div>;
+  return (
+    <div className="mt-7">
+      {user && <Cards todo={user.todo} postData={postData} />}
+    </div>
+  );
 }

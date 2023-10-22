@@ -6,17 +6,22 @@ import IconButton from "@mui/material/IconButton";
 import { Delete, DeleteForever } from "@mui/icons-material";
 import { useState } from "react";
 import { Input } from "@mui/material";
-export default function SingleCard({ todo, setTodos, index, todos }) {
+export default function SingleCard({ todo, setTodos, index, todos, postData }) {
   const [input, setInput] = useState({});
-  const [addtodo, setAddtodo] = useState("");
 
-  // console.log("singlecard", todo, setTodos, index, todos);
   const clickHandler = (e) => {
     switch (e.target.id) {
       case "DeleteTitle":
+        const newtodo = [...todos];
+        newtodo.splice(index, 1);
+        setTodos(newtodo);
+        setInput(e.target);
+        // for refresh page
+        postData(newtodo);
         return;
       case "AddTodo":
-        setCtodo();
+        postData(todos);
+        return;
     }
   };
 
@@ -24,9 +29,9 @@ export default function SingleCard({ todo, setTodos, index, todos }) {
     const newtodo = [...todos];
     newtodo[index][e.target.id] = e.target.value;
     //dosen't need to setTodos
+    setInput(e.target.value);
+    // for refresh page
   };
-
-  useEffect(() => {}, [addtodo]);
 
   return (
     <>
@@ -36,6 +41,7 @@ export default function SingleCard({ todo, setTodos, index, todos }) {
             <Input
               onChange={(e) => changeHandler(e)}
               placeholder="Todo Title"
+              value={todo.todoTitle}
               multiline
               disableUnderline
               maxRows={4}
