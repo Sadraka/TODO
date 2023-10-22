@@ -13,12 +13,5 @@ export default function Todos() {
   useEffect(() => {
     fethData();
   }, []);
-  return (
-    <div className="mt-7">
-      {user && user.todo.length === 0 && <Cards todo={user.todo} />}
-      {user &&
-        user.todo.length > 0 &&
-        user.todo.map((item) => <Cards todo={item} />)}
-    </div>
-  );
+  return <div className="mt-7">{user && <Cards todo={user.todo} />}</div>;
 }
