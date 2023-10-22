@@ -8,21 +8,24 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import { Delete, DeleteForever } from "@mui/icons-material";
 import { useState } from "react";
-export default function Cards() {
-  const [input, setInput] = useState();
+import { Input } from "@mui/material";
+export default function Cards({ todo }) {
+  const [input, setInput] = useState("");
   const [addtodo, setAddtodo] = useState("");
+  const [ctodo, setCtodo] = useState();
 
+  console.log("Cards", todo);
   const clickHandler = (e) => {
     setAddtodo(true);
-    console.log(e.target.attributes.class.nodeValue);
+    // console.log(e.target.attributes.class.nodeValue);
     switch (e.target.id) {
       case "AddTitle":
         setAddtodo([...addtodo, e.target.attributes.class.nodeValue]);
         return;
       case "DeleteTitle":
-        setAddtodo("");
-
         return;
+      case "AddTodo":
+        setCtodo();
     }
   };
 
@@ -31,8 +34,8 @@ export default function Cards() {
   };
 
   useEffect(() => {
-    console.log(addtodo);
-  });
+    console.log(addtodo, "useEffect");
+  }, [addtodo]);
   return (
     <>
       <div className={styles.container}>
@@ -45,17 +48,25 @@ export default function Cards() {
               endIcon={<AddIcon />}
               id="AddTitle"
             >
-              Add Todo List
+              Add Todo Title
             </Button>
           )}
           {addtodo && (
             <div className={styles.title}>
-              <input
+              <Input
                 onChange={(e) => changeHandler(e)}
                 placeholder="Todo Title"
+                multiline
+                disableUnderline
+                maxRows={4}
               />
+
               <div className={styles.titleButton}>
-                <Button onClick={(e) => clickHandler(e)} variant="contained">
+                <Button
+                  id="AddTodo"
+                  onClick={(e) => clickHandler(e)}
+                  variant="contained"
+                >
                   Add todo
                 </Button>
                 <IconButton id="DeleteTitle" onClick={(e) => clickHandler(e)}>

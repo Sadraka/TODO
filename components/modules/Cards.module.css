@@ -20,6 +20,15 @@
     
     
 }
+.container .title textarea{
+    margin-top: 5px;
+    border:4px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 45px;
+    padding: 5px;
+    
+
+}
 .card input {
     margin-top: 5px;
     border:4px solid rgb(0, 0, 0);

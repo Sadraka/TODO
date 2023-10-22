@@ -186,7 +186,7 @@ export default function Login() {
                 Sign in
               </button>
             </div>
-            <div className="text-gray-500 text-center mt-1">
+            <div className="text-gray-500 text-center mt-1 ">
               <WithGoogle />
             </div>
           </div>

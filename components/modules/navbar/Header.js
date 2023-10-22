@@ -47,6 +47,7 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (e) => {
+    setAnchorElNav(null);
     const childNode = e.target.textContent
       ? e.target.textContent
       : !e.target.textContent
@@ -65,7 +66,6 @@ function ResponsiveAppBar() {
     // }
     //to select li ==> li and Typography are not same attributes
 
-    setAnchorElNav(null);
     switch (childNode) {
       case "Login":
         router.push("/login");
