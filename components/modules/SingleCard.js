@@ -5,7 +5,8 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Delete, DeleteForever } from "@mui/icons-material";
 import { useState } from "react";
-import { Input } from "@mui/material";
+import { Input, setRef } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 import Todolist from "./Todolist";
 export default function SingleCard({ todo, setTodos, index, todos, postData }) {
   const [refresh, setRefresh] = useState({});
@@ -33,6 +34,9 @@ export default function SingleCard({ todo, setTodos, index, todos, postData }) {
         setRefresh(todolist);
         postData(todos);
         return;
+      case "SaveTodos":
+        postData(todos);
+        return;
     }
   };
 
@@ -40,7 +44,7 @@ export default function SingleCard({ todo, setTodos, index, todos, postData }) {
     const newtodo = [...todos];
     newtodo[index][e.target.id] = e.target.value;
     //dosen't need to setTodos
-    setInput(e.target.value);
+    setRefresh(e.target.value);
     // for refresh page
   };
 
@@ -76,6 +80,10 @@ export default function SingleCard({ todo, setTodos, index, todos, postData }) {
               >
                 Add todo
               </Button>
+
+              <IconButton id="SaveTodos" onClick={(e) => clickHandler(e)}>
+                <SaveIcon />
+              </IconButton>
               <IconButton id="DeleteTitle" onClick={(e) => clickHandler(e)}>
                 <Delete />
               </IconButton>
