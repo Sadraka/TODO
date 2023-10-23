@@ -8,10 +8,7 @@ export default function Cards({ todo, postData }) {
   const [addTitle, setAddTitle] = useState();
   const [todos, setTodos] = useState([...todo]);
   const clickHandler = (e) => {
-    setTodos([
-      ...todos,
-      { todoTitle: "", todos: [{ todoName: "", status: "" }] },
-    ]);
+    setTodos([...todos, { todoTitle: "", todos: [] }]);
   };
 
   return (

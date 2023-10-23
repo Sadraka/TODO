@@ -1,11 +1,12 @@
 .container{
     display: flex;
     
-    overflow: auto;
-    white-space:nowrap;
+   overflow: auto;
+
+    /* white-space:nowrap; */
     position: relative; 
     width: 100%;
-    transition: all 1s;
+    margin-bottom: 10px;
 
 }
 .singlecard{

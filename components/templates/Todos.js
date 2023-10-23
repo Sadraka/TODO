@@ -20,13 +20,11 @@ export default function Todos() {
       "Content-Type": "application/json",
     });
     const data = await res.json();
-    console.log(data, "POST DATA");
+    // console.log(data, "POST DATA");
   };
 
   useEffect(() => {
-    if (status === "authenticated") {
-      fethData();
-    }
+    fethData();
   }, []);
   return (
     <div className="mt-7">

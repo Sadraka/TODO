@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -25,6 +25,8 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { useScrollTrigger } from "@mui/material";
+import { Window } from "@mui/icons-material";
 
 const unAuthPages = ["Login"];
 const AuthPages = ["Todos", "Add Todo", "Profile", "Logout"];
@@ -116,7 +118,7 @@ function ResponsiveAppBar() {
     },
   }));
   return (
-    <AppBar position="static" sx={{ backgroundColor: "black" }}>
+    <AppBar position="sticky" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

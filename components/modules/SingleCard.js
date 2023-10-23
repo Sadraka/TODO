@@ -6,20 +6,31 @@ import IconButton from "@mui/material/IconButton";
 import { Delete, DeleteForever } from "@mui/icons-material";
 import { useState } from "react";
 import { Input } from "@mui/material";
+import Todolist from "./Todolist";
 export default function SingleCard({ todo, setTodos, index, todos, postData }) {
-  const [input, setInput] = useState({});
-
+  const [refresh, setRefresh] = useState({});
+  const todolist = todos[index].todos;
+  console.log(todolist.length);
+  console.log(todos[index].todos);
   const clickHandler = (e) => {
     switch (e.target.id) {
       case "DeleteTitle":
         const newtodo = [...todos];
         newtodo.splice(index, 1);
         setTodos(newtodo);
-        setInput(e.target);
+        setRefresh(todolist);
+
         // for refresh page
         postData(newtodo);
+        // fist add to DB then update ui ===>
         return;
       case "AddTodo":
+        const todolist = [...todos];
+        todolist[index].todos = [
+          ...todolist[index].todos,
+          { todoName: "", status: "" },
+        ];
+        setRefresh(todolist);
         postData(todos);
         return;
     }
@@ -47,7 +58,16 @@ export default function SingleCard({ todo, setTodos, index, todos, postData }) {
               maxRows={4}
               id="todoTitle"
             />
-
+            {todolist &&
+              todolist.map((item, listindex) => (
+                <Todolist
+                  key={listindex}
+                  setTodos={setTodos}
+                  todos={todos}
+                  index={index}
+                  listindex={listindex}
+                />
+              ))}
             <div className={styles.titleButton}>
               <Button
                 id="AddTodo"
