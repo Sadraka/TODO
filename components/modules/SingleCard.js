@@ -20,8 +20,7 @@ export default function SingleCard({
   const [refresh, setRefresh] = useState({});
 
   const todolist = todos[index].todos;
-  // console.log(todolist.length);
-  // console.log(todos[index].todos);
+
   const clickHandler = async (e) => {
     switch (e.target.id) {
       case "DeleteTitle":

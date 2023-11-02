@@ -15,11 +15,10 @@ export default function Todolist({
   const inputValue = todos[index].todos[listindex].todoName;
   const status = todos[index].todos[listindex].status;
 
-  //   console.log(refresh);
   const changeHandler = (e) => {
     const newtodo = [...todos];
     newtodo[index].todos[listindex].todoName = e.target.value;
-    console.log("salam");
+
     //dosen't need to setTodos
     setRefresh(e.target.value);
   };
@@ -35,7 +34,7 @@ export default function Todolist({
       case "done":
         const donetodo = [...todos];
         donetodo[index].todos[listindex].status = e.target.id;
-        console.log(donetodo[index].todos[listindex].status);
+
         await postData(donetodo);
         return;
       case "progress":

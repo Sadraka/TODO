@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function Landing() {
   const { data, status } = useSession();
   const router = useRouter();
-  console.log(data);
+
   if (status === "authenticated") {
     router.push("/todos");
     return;

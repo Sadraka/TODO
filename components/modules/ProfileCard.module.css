@@ -33,8 +33,10 @@
 
 }
   .container .information img{
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-right: 5px;
   }
   .container .information .name{
     

@@ -11,7 +11,6 @@ import Typed from "typed.js";
 export default function Home() {
   const el = useRef(null);
   const { data, status } = useSession();
-  console.log(status);
 
   const clickHandler = async () => {
     await signOut({

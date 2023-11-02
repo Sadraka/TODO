@@ -32,7 +32,7 @@ export default function ProfileCard({ user }) {
               "Content-Type": "application/json",
             });
             const data = await res.json();
-            console.log(data);
+
             if (data.message === "success") {
               setSubmit(false);
               Notify.success(`Password has beed changed Successfully`, {
@@ -77,7 +77,7 @@ export default function ProfileCard({ user }) {
               "Content-Type": "application/json",
             });
             const data = await res.json();
-            console.log(data);
+
             if (data.message === "success") {
               setSubmit(false);
               Notify.success(`Password has beed changed Successfully`, {
@@ -135,7 +135,12 @@ export default function ProfileCard({ user }) {
   return (
     <div className={styles.container}>
       <div className={styles.information}>
-        <Image src={profilesvg} width={250} alt="Profile" />
+        <Image
+          src={user.image || profilesvg}
+          width={150}
+          height={150}
+          alt="Profile"
+        />
         <div className={styles.name}>
           <p>Name : {user && <span>{user.name}</span>}</p>
           <p>

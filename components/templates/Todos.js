@@ -27,7 +27,7 @@ export default function Todos() {
       "Content-Type": "application/json",
     });
     const data = await res.json();
-    console.log(index);
+
     if (data.message === "success") {
       setSaveload(false);
       setDeleteload(false);
