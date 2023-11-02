@@ -29,7 +29,7 @@ import { useScrollTrigger } from "@mui/material";
 import { Window } from "@mui/icons-material";
 
 const unAuthPages = ["Login"];
-const AuthPages = ["Todos", "Add Todo", "Profile", "Logout"];
+const AuthPages = ["Add Todo", "Profile", "Logout"];
 const authSetting = ["Profile", "Logout"];
 const unauthSetting = ["Login"];
 
@@ -80,9 +80,7 @@ function ResponsiveAppBar() {
       case "Profile":
         router.push("/profile");
         return;
-      case "Todos":
-        router.push("/todos");
-        return;
+
       case "Add Todo":
         router.push("/");
         return;
