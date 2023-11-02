@@ -6,7 +6,8 @@ const error = (data) => {
   const result = {
     emailResult: emailRegex.test(email),
     passwordResult: passwordRegex.test(password),
-    oldpasswordResult: passwordRegex.test(oldpassword),
+    oldpasswordResult:
+      passwordRegex.test(oldpassword) && oldpassword !== password,
     matchpassword: password.length > 0 && password === repassword,
     nameResult: name && name.length > 0,
     lastnameResult: lastname && lastname.length > 0,
@@ -24,7 +25,8 @@ const error = (data) => {
       return res;
     },
     changepassword: function () {
-      const res = result.passwordResult && result.matchpassword;
+      const res =
+        result.passwordResult && result.matchpassword && oldpasswordResult;
       return res;
     },
   };

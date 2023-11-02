@@ -4,7 +4,6 @@ import ProfileCard from "../modules/ProfileCard";
 
 export default function Profile() {
   const [user, setUser] = useState("");
-  console.log(user);
 
   const fethData = async () => {
     const res = await fetch("/api/todo/get");
