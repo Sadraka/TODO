@@ -27,6 +27,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useScrollTrigger } from "@mui/material";
 import { Window } from "@mui/icons-material";
+import { useEffect } from "react";
 
 const unAuthPages = ["Login"];
 const AuthPages = ["Add Todo", "Profile", "Logout"];
@@ -38,7 +39,15 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const { data, status } = useSession();
-
+  const [user, setUser] = useState("");
+  const fethData = async () => {
+    const res = await fetch("/api/todo/get");
+    const data = await res.json();
+    setUser(data.user);
+  };
+  useEffect(() => {
+    fethData();
+  }, []);
   const router = useRouter();
 
   const handleOpenNavMenu = (event) => {
@@ -281,7 +290,11 @@ function ResponsiveAppBar() {
                   <Avatar
                     sx={{ bgcolor: "transparent" }}
                     alt="S"
-                    src={status === "authenticated" ? data.user.image : " "}
+                    src={
+                      status === "authenticated"
+                        ? data.user.image || user.image
+                        : " "
+                    }
                   >
                     <PersonIcon />
                   </Avatar>
