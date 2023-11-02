@@ -46,3 +46,54 @@
 .container .discraption {
     padding: 0 150px;
 }
+@media screen and (max-width:930px){
+    .container {
+        margin-top: 100px;
+    }
+    .container span h1 , .container span h2{
+        font-size: 3.5rem;
+    }
+
+    .container .discraption {
+        padding: 0 40px;
+    }
+    .container .span{
+     
+        display: block;
+     }
+}
+@media screen and (max-width:785px){
+    .container span h1, .container span h2{
+
+        font-size: 3rem;
+        font-weight: bolder;
+    
+       
+    }
+    .container .span{
+     
+        display: block;
+     }
+    
+}
+@media screen and (max-width:680px){
+    .container span h1 , .container span h2{
+
+        font-size: 2rem;
+        font-weight: bolder;
+    
+       
+    }
+    .container h3{
+        font-size: 1rem;
+
+    }
+    .container .span{
+     
+       display: block;
+    }
+    .container .span p {
+        font-size: 2rem;
+    }
+}
+
