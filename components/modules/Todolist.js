@@ -23,6 +23,7 @@ export default function Todolist({ setTodos, index, listindex, todos }) {
         minRows={3}
         id="todolist"
       />
+      {/* add status button */}
     </div>
   );
 }
