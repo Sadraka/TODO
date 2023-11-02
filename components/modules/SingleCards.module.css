@@ -36,7 +36,11 @@
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
+   
 
+}
+.container .titleButton .addtodoButton{
+    min-width: 110px
 }
 .container button:hover{
     color: #000;

@@ -7,6 +7,9 @@ export default function Todos() {
   const [user, setUser] = useState("");
   const { status, data } = useSession();
   const [saveload, setSaveload] = useState(false);
+  const [deleteload, setDeleteload] = useState(false);
+  const [delstatus, setDelstatus] = useState(false);
+
   const fethData = async () => {
     const res = await fetch("/api/todo/get");
     const data = await res.json();
@@ -15,6 +18,8 @@ export default function Todos() {
 
   const postData = async (index) => {
     setSaveload(true);
+    setDeleteload(true);
+
     const res = await fetch("/api/todo/post", {
       method: "POST",
       body: JSON.stringify(index),
@@ -24,6 +29,8 @@ export default function Todos() {
     console.log(index);
     if (data.message === "success") {
       setSaveload(false);
+      setDeleteload(false);
+      setDelstatus(true);
     }
   };
 
@@ -33,7 +40,13 @@ export default function Todos() {
   return (
     <div className="mt-7">
       {user && (
-        <Cards todo={user.todo} postData={postData} saveload={saveload} />
+        <Cards
+          todo={user.todo}
+          postData={postData}
+          saveload={saveload}
+          deleteload={deleteload}
+          delstatus={delstatus}
+        />
       )}
     </div>
   );

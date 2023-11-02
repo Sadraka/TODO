@@ -15,32 +15,36 @@ export default function SingleCard({
   todos,
   postData,
   saveload,
+  deleteload,
 }) {
   const [refresh, setRefresh] = useState({});
 
   const todolist = todos[index].todos;
   // console.log(todolist.length);
   // console.log(todos[index].todos);
-  const clickHandler = (e) => {
+  const clickHandler = async (e) => {
     switch (e.target.id) {
       case "DeleteTitle":
         const newtodo = [...todos];
         newtodo.splice(index, 1);
-        setTodos(newtodo);
-        setRefresh(todolist);
 
         // for refresh page
-        postData(newtodo);
-        // fist add to DB then update ui ===>
+
+        // fist add to DB then update ui ===> add async await
+        await postData(newtodo);
+        setRefresh(todolist);
+        setTodos(newtodo);
         return;
       case "AddTodo":
+        console.log(e.target.id);
         const todolist = [...todos];
         todolist[index].todos = [
           ...todolist[index].todos,
           { todoName: "", status: "" },
         ];
+        await postData(todos);
         setRefresh(todolist);
-        postData(todos);
+
         return;
       case "SaveTodos":
         postData(todos);
@@ -82,11 +86,55 @@ export default function SingleCard({
               ))}
             <div className={styles.titleButton}>
               <Button
+                className={styles.addtodoButton}
                 id="AddTodo"
                 onClick={(e) => clickHandler(e)}
                 variant="contained"
               >
-                Add todo
+                {saveload ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="18" cy="12" r="0" fill="currentColor">
+                      <animate
+                        attributeName="r"
+                        begin=".67"
+                        calcMode="spline"
+                        dur="1.5s"
+                        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                        repeatCount="indefinite"
+                        values="0;2;0;0"
+                      />
+                    </circle>
+                    <circle cx="12" cy="12" r="0" fill="currentColor">
+                      <animate
+                        attributeName="r"
+                        begin=".33"
+                        calcMode="spline"
+                        dur="1.5s"
+                        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                        repeatCount="indefinite"
+                        values="0;2;0;0"
+                      />
+                    </circle>
+                    <circle cx="6" cy="12" r="0" fill="currentColor">
+                      <animate
+                        attributeName="r"
+                        begin="0"
+                        calcMode="spline"
+                        dur="1.5s"
+                        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                        repeatCount="indefinite"
+                        values="0;2;0;0"
+                      />
+                    </circle>
+                  </svg>
+                ) : (
+                  "Add Todo"
+                )}
               </Button>
 
               <IconButton id="SaveTodos" onClick={(e) => clickHandler(e)}>
@@ -136,7 +184,50 @@ export default function SingleCard({
                 )}
               </IconButton>
               <IconButton id="DeleteTitle" onClick={(e) => clickHandler(e)}>
-                <Delete />
+                {deleteload ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="18" cy="12" r="0" fill="currentColor">
+                      <animate
+                        attributeName="r"
+                        begin=".67"
+                        calcMode="spline"
+                        dur="1.5s"
+                        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                        repeatCount="indefinite"
+                        values="0;2;0;0"
+                      />
+                    </circle>
+                    <circle cx="12" cy="12" r="0" fill="currentColor">
+                      <animate
+                        attributeName="r"
+                        begin=".33"
+                        calcMode="spline"
+                        dur="1.5s"
+                        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                        repeatCount="indefinite"
+                        values="0;2;0;0"
+                      />
+                    </circle>
+                    <circle cx="6" cy="12" r="0" fill="currentColor">
+                      <animate
+                        attributeName="r"
+                        begin="0"
+                        calcMode="spline"
+                        dur="1.5s"
+                        keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                        repeatCount="indefinite"
+                        values="0;2;0;0"
+                      />
+                    </circle>
+                  </svg>
+                ) : (
+                  <Delete />
+                )}
               </IconButton>
             </div>
           </div>
