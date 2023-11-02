@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import SingleCard from "./SingleCard";
 import styles from "./Cards.module.css";
-export default function Cards({ todo, postData }) {
+export default function Cards({ todo, postData, saveload }) {
   const [addTitle, setAddTitle] = useState();
   const [todos, setTodos] = useState([...todo]);
   const clickHandler = (e) => {
@@ -23,6 +23,7 @@ export default function Cards({ todo, postData }) {
                 index={index}
                 todos={todos}
                 postData={postData}
+                saveload={saveload}
               />
             </div>
           ))}

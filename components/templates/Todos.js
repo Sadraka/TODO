@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 export default function Todos() {
   const [user, setUser] = useState("");
   const { status, data } = useSession();
-
+  const [saveload, setSaveload] = useState(false);
   const fethData = async () => {
     const res = await fetch("/api/todo/get");
     const data = await res.json();
@@ -14,13 +14,17 @@ export default function Todos() {
   };
 
   const postData = async (index) => {
+    setSaveload(true);
     const res = await fetch("/api/todo/post", {
       method: "POST",
       body: JSON.stringify(index),
       "Content-Type": "application/json",
     });
     const data = await res.json();
-    // console.log(data, "POST DATA");
+    console.log(index);
+    if (data.message === "success") {
+      setSaveload(false);
+    }
   };
 
   useEffect(() => {
@@ -28,7 +32,9 @@ export default function Todos() {
   }, []);
   return (
     <div className="mt-7">
-      {user && <Cards todo={user.todo} postData={postData} />}
+      {user && (
+        <Cards todo={user.todo} postData={postData} saveload={saveload} />
+      )}
     </div>
   );
 }
