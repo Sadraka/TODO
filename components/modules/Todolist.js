@@ -58,7 +58,8 @@ export default function Todolist({
           multiline
           value={inputValue && inputValue}
           disableUnderline
-          minRows={4}
+          minRows={5}
+          maxRows={7}
           id="todolist"
         />
         {/* add status button */}
