@@ -1,11 +1,12 @@
 const error = (data) => {
-  const { name, lastname, email, password, repassword } = data;
+  const { name, lastname, email, password, repassword, oldpassword } = data;
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g; //test@gmail.com
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //At least 8 characters , Number & Letters
 
   const result = {
     emailResult: emailRegex.test(email),
     passwordResult: passwordRegex.test(password),
+    oldpasswordResult: passwordRegex.test(oldpassword),
     matchpassword: password.length > 0 && password === repassword,
     nameResult: name && name.length > 0,
     lastnameResult: lastname && lastname.length > 0,
@@ -20,6 +21,10 @@ const error = (data) => {
     },
     loginResult: function () {
       const res = result.emailResult && result.passwordResult;
+      return res;
+    },
+    changepassword: function () {
+      const res = result.passwordResult && result.matchpassword;
       return res;
     },
   };

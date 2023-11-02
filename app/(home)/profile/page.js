@@ -1,3 +1,4 @@
+import Profile from "@/components/templates/Profile";
 import React from "react";
 export const metadata = {
   title: "Todo Profile",
@@ -5,5 +6,9 @@ export const metadata = {
 };
 
 export default function profile() {
-  return <div>profile</div>;
+  return (
+    <div>
+      <Profile />
+    </div>
+  );
 }
