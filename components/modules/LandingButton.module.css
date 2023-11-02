@@ -1,0 +1,16 @@
+.container button{
+   
+    background-color: black;
+    color: #fff;
+    margin-top: 50px;
+    width: 225px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 50px;
+    
+}
+.container button:hover{
+    color: #000;
+    background-color: #f1f1f1;
+
+}

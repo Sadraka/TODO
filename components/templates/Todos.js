@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Cards from "../modules/Cards";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Todos() {
   const [user, setUser] = useState("");
@@ -37,6 +38,12 @@ export default function Todos() {
   useEffect(() => {
     fethData();
   }, []);
+  const router = useRouter();
+  if (status === "unauthenticated") {
+    router.push("/");
+    return;
+  }
+
   return (
     <div className="mt-7">
       {user && (

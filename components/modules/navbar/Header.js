@@ -80,7 +80,6 @@ function ResponsiveAppBar() {
       case "Profile":
         router.push("/profile");
         return;
-
       case "Add Todo":
         router.push("/todos");
         return;
@@ -193,7 +192,10 @@ function ResponsiveAppBar() {
                       {page === "Login" && <LockOpenIcon />}
                       <Typography
                         textAlign="center"
-                        sx={{ paddingLeft: "15px", fontWeight: "500" }}
+                        sx={{
+                          paddingLeft: "15px",
+                          fontWeight: "500",
+                        }}
                       >
                         {page}
                       </Typography>
@@ -234,7 +236,7 @@ function ResponsiveAppBar() {
               style={{
                 display: "flex",
                 justifyContent: "center",
-                minWidth: "80vw",
+                minWidth: "83vw",
               }}
             >
               {status === "authenticated"
@@ -244,11 +246,6 @@ function ResponsiveAppBar() {
                       onClick={handleCloseNavMenu}
                       sx={{ marginLeft: "50px" }}
                     >
-                      {page === "Todos" && (
-                        <LightTooltip title={page} id="salam">
-                          <FormatListBulletedIcon />
-                        </LightTooltip>
-                      )}
                       {page === "Add Todo" && (
                         <LightTooltip title={page}>
                           <PlaylistAddIcon />
