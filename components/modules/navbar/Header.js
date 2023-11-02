@@ -82,7 +82,7 @@ function ResponsiveAppBar() {
         return;
 
       case "Add Todo":
-        router.push("/");
+        router.push("/todos");
         return;
     }
   };
