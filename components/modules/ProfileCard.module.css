@@ -1,13 +1,6 @@
 .container {
     background-color: rgb(255, 255, 255);
-    /* min-height: 100vh; */
-    /* min-width: 100vw; */
-    /* display: flex;
-    justify-content: center;
-    padding-top: 1rem;
-    line-height: 2.25rem;
-    letter-spacing: -0.025em;
-   */
+
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -112,3 +105,24 @@
 }
 .container input:focus{
     outline: none;}
+
+    @media screen and (max-width:400px){
+        .container .information {
+           max-width: 90vw;
+           /* if used min-with =>  */
+           min-width: 90vw;
+        
+          
+
+           
+        
+       
+         
+        }
+      
+        
+          .container input , .container button {
+            max-width:90vw;
+          }
+
+    }

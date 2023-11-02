@@ -54,7 +54,7 @@ export default function Login() {
       }
       if (res.error) {
         if (res.error === "Illegal arguments: string, undefined") {
-          Notify.failure("Please login with your Google", {
+          Notify.failure("Please login with your Google account", {
             position: "center-bottom",
             clickToClose: true,
             failure: {
