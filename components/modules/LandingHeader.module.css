@@ -46,10 +46,14 @@
 .container .discraption {
     padding: 0 150px;
 }
-@media screen and (max-width:930px){
-    .container {
-        margin-top: 100px;
+@media screen and (max-width:1024px){
+    .container .span p {
+     
+        display: none;
     }
+}
+@media screen and (max-width:930px){
+ 
     .container span h1 , .container span h2{
         font-size: 3.5rem;
     }
@@ -58,9 +62,14 @@
         padding: 0 40px;
     }
     .container .span{
+    min-height: 180px;
      
         display: block;
      }
+     .container .span p {
+     
+        display: none;
+    }
 }
 @media screen and (max-width:785px){
     .container span h1, .container span h2{
@@ -71,10 +80,17 @@
        
     }
     .container .span{
+    min-height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
      
         display: block;
      }
-    
+     .container .span p {
+     
+        display: none;
+    }
 }
 @media screen and (max-width:680px){
     .container span h1 , .container span h2{
@@ -89,11 +105,15 @@
 
     }
     .container .span{
-     
-       display: block;
+    min-height: 183px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+       
     }
     .container .span p {
-        font-size: 2rem;
+     
+        display: none;
     }
 }
 
