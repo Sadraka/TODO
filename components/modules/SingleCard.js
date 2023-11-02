@@ -36,14 +36,12 @@ export default function SingleCard({
         setTodos(newtodo);
         return;
       case "AddTodo":
-        console.log(e.target.id);
         const todolist = [...todos];
         todolist[index].todos = [
           ...todolist[index].todos,
           { todoName: "", status: "" },
         ];
-        await postData(todos);
-        setRefresh(todolist);
+        await postData(todolist);
 
         return;
       case "SaveTodos":
@@ -82,6 +80,7 @@ export default function SingleCard({
                   todos={todos}
                   index={index}
                   listindex={listindex}
+                  postData={postData}
                 />
               ))}
             <div className={styles.titleButton}>

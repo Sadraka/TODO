@@ -1,0 +1,59 @@
+.container .todo{
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+
+
+    
+
+}
+
+.container .buttonlist {
+    display: flex;
+    flex-direction: column;
+   justify-content: space-around;
+    
+
+}
+.container .buttonlist button{
+    height: fit-content;
+    margin-left: 5px;
+    border-radius: 25%;
+    padding: 4px;
+   font-size: 1.25rem;
+    border: none;
+}
+
+.container .done {
+color: #65a30d;
+
+background: none;
+
+
+}
+.container .done:hover{
+    background: none;
+    color: #65a30d;
+}
+
+.container .review{
+   color: #7c3aed;
+   background: none;
+}
+.container .review:hover{
+    color: #7c3aed;
+    background: none;
+ }
+.container .progress{
+    color: #eab308;
+    background: none;
+}
+.container .progress:hover{
+    color: #eab308;
+    background: none;
+}
+.container .delete:hover{
+    color:red;
+    
+}

@@ -11,7 +11,6 @@ export default function Cards({
   deleteload,
   delstatus,
 }) {
-  const [addTitle, setAddTitle] = useState();
   const [todos, setTodos] = useState([...todo]);
   const clickHandler = (e) => {
     setTodos([...todos, { todoTitle: "", todos: [] }]);
@@ -25,9 +24,9 @@ export default function Cards({
             <div className={styles.singlecard} key={index}>
               <SingleCard
                 todo={item}
+                todos={todos}
                 setTodos={setTodos}
                 index={index}
-                todos={todos}
                 postData={postData}
                 saveload={saveload}
                 deleteload={deleteload}
