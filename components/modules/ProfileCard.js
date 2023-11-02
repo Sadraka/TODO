@@ -5,6 +5,7 @@ import Image from "next/image";
 import profilesvg from "@/global/profile.svg";
 import { Button } from "@mui/material";
 import error from "@/app/utils/error";
+import { Notify } from "notiflix";
 export default function ProfileCard({ user }) {
   const [pass, setPass] = useState(false);
   const [submit, setSubmit] = useState(false);
@@ -14,7 +15,7 @@ export default function ProfileCard({ user }) {
     repassword: "",
   });
 
-  const cliclHandler = (e) => {
+  const cliclHandler = async (e) => {
     switch (e.target.id) {
       case "change":
         setPass(true);
@@ -25,9 +26,96 @@ export default function ProfileCard({ user }) {
           error(password);
         if (user.password) {
           if (matchpassword && passwordResult && oldpasswordResult) {
-            console.log("ok");
+            const res = await fetch("/api/profile/update", {
+              method: "POST",
+              body: JSON.stringify(password),
+              "Content-Type": "application/json",
+            });
+            const data = await res.json();
+            console.log(data);
+            if (data.message === "success") {
+              setSubmit(false);
+              Notify.success(`Password has beed changed Successfully`, {
+                position: "center-bottom",
+                clickToClose: true,
+                success: {
+                  background: "#000",
+                  textColor: "#fff",
+                  notiflixIconColor: "#fff",
+                },
+              });
+            }
+
+            if (data.message !== "success") {
+              setSubmit(false);
+              Notify.failure(data.message, {
+                position: "center-bottom",
+                clickToClose: true,
+                failure: {
+                  background: "rgba(107, 114, 128)",
+                  notiflixIconColor: "#fff",
+                },
+              });
+            }
+          }
+          if (!passwordResult || !matchpassword || !oldpasswordResult) {
+            setSubmit(false);
+            Notify.failure("Enter Correct Password", {
+              position: "center-bottom",
+              clickToClose: true,
+              failure: {
+                background: "rgba(107, 114, 128)",
+                notiflixIconColor: "#fff",
+              },
+            });
+          }
+        } else {
+          if (matchpassword && passwordResult) {
+            const res = await fetch("/api/profile/post", {
+              method: "POST",
+              body: JSON.stringify(password),
+              "Content-Type": "application/json",
+            });
+            const data = await res.json();
+            console.log(data);
+            if (data.message === "success") {
+              setSubmit(false);
+              Notify.success(`Password has beed changed Successfully`, {
+                position: "center-bottom",
+                clickToClose: true,
+                success: {
+                  background: "#000",
+                  textColor: "#fff",
+                  notiflixIconColor: "#fff",
+                },
+              });
+            }
+
+            if (data.message !== "success") {
+              setSubmit(false);
+              Notify.failure(data.message, {
+                position: "center-bottom",
+                clickToClose: true,
+                failure: {
+                  background: "rgba(107, 114, 128)",
+                  notiflixIconColor: "#fff",
+                },
+              });
+            }
+          }
+          if (!passwordResult || !matchpassword) {
+            setSubmit(false);
+            Notify.failure("Enter Correct Password", {
+              position: "center-bottom",
+              clickToClose: true,
+              failure: {
+                background: "rgba(107, 114, 128)",
+                notiflixIconColor: "#fff",
+              },
+            });
           }
         }
+
         return;
     }
   };
