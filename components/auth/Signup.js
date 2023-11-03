@@ -96,7 +96,9 @@ export default function signup() {
     <div className={styles.container}>
       <div className={styles.form}>
         <div className={styles.header}>
-          <h1>Todo</h1>
+          <Link href={"/"}>
+            <h1>Todo</h1>
+          </Link>
           <h2>Hello, who’s this?</h2>
         </div>
 
