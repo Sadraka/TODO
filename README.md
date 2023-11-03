@@ -10,7 +10,7 @@
             <li>App router</li>
             <li>Next API</li>
         </ul>
-        
+        <ul>
             <li><h4>Libraries</h4></li>
             <ul>
             
@@ -22,8 +22,12 @@
                 <li>typed.js</li>
                 <li>bcryptjs</li>
             </ul>
+        </ul>
         
-        
+    </li>
+    <li>
+        <h3>Database</h3>
+        <li>MongoDB</li>
     </li>
 
 </ul>
