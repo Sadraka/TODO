@@ -10,11 +10,9 @@
             <li>V 14.0.1</li>
             <li>App router</li>
             <li>Next API</li>
-        </ul>
-        
+        </ul>  
     </li>
     <li>
-        
         <h4>Libraries</h4>
         <ul><li>MUI</li>
             <li>next-auth</li>
@@ -28,7 +26,4 @@
     <li>
         <h4>MongoDB</h4>
     </li>   
-            
-
-
 </ul>
