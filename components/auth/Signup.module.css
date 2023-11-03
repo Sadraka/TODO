@@ -153,6 +153,16 @@ outline: none;}
   
     
   }
+  .diverror{
+
+  
+    min-height: 3vh;
+    margin-bottom: 5px;
+  }
+  .texterror{
+    font-size: .7rem;
+  }
+
   .form {
     max-width: 90vw;
   }
