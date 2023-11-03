@@ -159,11 +159,11 @@ export default function ProfileCard({ user }) {
           {user && user.password && (
             <div className={styles.input}>
               <label htmlFor="oldpassword" className={styles.label}>
-                Confirm Password
+                Old Password
               </label>
               <input
                 onChange={(e) => changeHandler(e)}
-                placeholder="Old Password"
+                placeholder="OLD PASSWORD"
                 id="oldpassword"
                 type="password"
               />
