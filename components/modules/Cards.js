@@ -27,10 +27,6 @@ export default function Cards({
                 todos={todos}
                 setTodos={setTodos}
                 index={index}
-                postData={postData}
-                saveload={saveload}
-                deleteload={deleteload}
-                delstatus={delstatus}
               />
             </div>
           ))}

@@ -8,16 +8,30 @@ import { useState } from "react";
 import { Input, setRef } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import Todolist from "./Todolist";
-export default function SingleCard({
-  todo,
-  setTodos,
-  index,
-  todos,
-  postData,
-  saveload,
-  deleteload,
-}) {
+export default function SingleCard({ todo, setTodos, index, todos }) {
   const [refresh, setRefresh] = useState({});
+
+  const [saveload, setSaveload] = useState(false);
+  const [deleteload, setDeleteload] = useState(false);
+  const [delstatus, setDelstatus] = useState(false);
+
+  const postData = async (index) => {
+    setSaveload(true);
+    setDeleteload(true);
+
+    const res = await fetch("/api/todo/post", {
+      method: "POST",
+      body: JSON.stringify(index),
+      "Content-Type": "application/json",
+    });
+    const data = await res.json();
+
+    if (data.message === "success") {
+      setSaveload(false);
+      setDeleteload(false);
+      setDelstatus(true);
+    }
+  };
 
   const todolist = todos[index].todos;
 
