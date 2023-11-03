@@ -6,20 +6,24 @@
     <li>
         <h4>Next.js</h4>
         <ul>
-            <li>V 140.0.1</li>
+            <li>V 14.0.1</li>
             <li>App router</li>
             <li>Next API</li>
         </ul>
         <ul>
-            <h4>Libraries</h4>
-            <li>MUI</li>
-            <li>next-auth</li>
-            <li>notiflix</li>
-            <li>mongoose</li>
-            <li>jsonwebtoken</li>
-            <li>typed.js</li>
-            <li>bcryptjs</li>
+            <li><h4>Libraries</h4></li>
+            <ul>
+            
+                <li>MUI</li>
+                <li>next-auth</li>
+                <li>notiflix</li>
+                <li>mongoose</li>
+                <li>jsonwebtoken</li>
+                <li>typed.js</li>
+                <li>bcryptjs</li>
+            </ul>
         </ul>
+        
     </li>
 
 </ul>
