@@ -1,0 +1,36 @@
+.container .button , .container .clicked  {
+    width: 384px;
+    background-color: #ffffff;
+    text-align: center;
+    font-weight: 600;
+
+    font-size: .875rem;
+    border-radius: 5px;
+    margin-top:15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .15s;
+    /* height: 36px; */
+    border: 1px solid rgba(128, 128, 128, 0.173);
+}
+.clicked {
+    
+    cursor: not-allowed;
+    width: 384px;
+    opacity: 50%;
+  
+    
+  }
+  .button img , .clicked img {
+    margin-right: 10px;
+  }
+  .container  button:hover{
+    box-shadow: 1px 1px 10px #00000025;
+  }
+  @media screen and (max-width: 640px){
+
+   .container .button  ,  .container .clicked {
+        width: 100%;
+    }
+    }
