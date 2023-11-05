@@ -8,7 +8,7 @@ export default function WithGoogle() {
 
   const signInHandler = () => {
     setIsclick(true);
-    console.log("click");
+
     signIn("google");
   };
   return (

@@ -136,7 +136,7 @@ export default function Login() {
 
               <div className={styles.diverror}>
                 {showerror && !err.emailResult && (
-                  <span className={styles.texterror}>Email is not valid!</span>
+                  <span className={styles.texterror}>*Email is not valid!</span>
                 )}
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function Login() {
               <div className={styles.diverror}>
                 {showerror && !err.passwordResult && (
                   <span className={styles.texterror}>
-                    Enter correct password{" "}
+                    *Enter correct password{" "}
                   </span>
                 )}
               </div>

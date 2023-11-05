@@ -121,7 +121,7 @@ export default function signup() {
 
               <div className={styles.diverror}>
                 {showerror && !err.nameResult && (
-                  <span className={styles.texterror}>Name requared !</span>
+                  <span className={styles.texterror}>*Name requared !</span>
                 )}
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function signup() {
               />
               <div className={styles.diverror}>
                 {showerror && !err.lastnameResult && (
-                  <span className={styles.texterror}>Lastname requared !</span>
+                  <span className={styles.texterror}>*Lastname requared !</span>
                 )}
               </div>
             </div>
@@ -163,7 +163,7 @@ export default function signup() {
 
             <div className={styles.diverror}>
               {showerror && !err.emailResult && (
-                <span className={styles.texterror}>Email is not valid!</span>
+                <span className={styles.texterror}>*Email is not valid!</span>
               )}
             </div>
           </div>
@@ -183,7 +183,7 @@ export default function signup() {
             <div className={styles.diverror}>
               {showerror && !err.passwordResult && (
                 <span className={styles.texterror}>
-                  The password should be more than 8 & contain letters and
+                  *The Password should be more than 8 & contain letters and
                   numbers
                 </span>
               )}
@@ -205,7 +205,7 @@ export default function signup() {
             <div className={styles.diverror}>
               {showerror && !err.matchpassword && (
                 <span className={styles.texterror}>
-                  The passwords are not identical to each other !
+                  *The passwords are not identical to each other !
                 </span>
               )}
             </div>
